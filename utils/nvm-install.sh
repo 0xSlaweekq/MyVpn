@@ -4,6 +4,9 @@ echo "Install NVM & npm"
 echo '#################################################################'
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 source ~/.bashrc
+
+export NVM_DIR=~/.nvm && source ~/.nvm/nvm.sh
+
 nvm ls-remote
 VERSION=20.13.1
 nvm install $VERSION
