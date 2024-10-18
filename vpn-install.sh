@@ -39,10 +39,10 @@ echo '#################################################################'
 echo "Updating system completed"
 echo '#################################################################'
 
-curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | bash
-curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/3proxy-uninstall.sh | bash
-curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | bash
-curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/outline-install.sh| bash
+wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | bash
+wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/3proxy-uninstall.sh | bash
+wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | bash
+wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/outline-install.sh| bash
 
 
 echo '#################################################################'
@@ -60,7 +60,7 @@ echo '#################################################################'
 # echo '#################################################################'
 # cd ~
 # wget https://git.io/wireguard -O wireguard-install.sh && sudo bash wireguard-install.sh
-# curl -O https://raw.githubusercontent.com/0xSlaweekq/setup/main/vpn/wireguard-install.sh
+# curl -O https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/wg/wireguard-install.sh
 # curl -O https://raw.githubusercontent.com/angristan/wireguard-install/master/wireguard-install.sh
 # chmod +x wireguard-install.sh
 # sudo ./wireguard-install.sh

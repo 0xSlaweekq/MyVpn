@@ -34,7 +34,7 @@ function getHomeDirForClient() {
 
 function installQuestions() {
 	echo "Welcome to the WireGuard installer!"
-	echo "The git repository is available at: https://github.com/0xSlaweekq/wireguard-install"
+	echo "The git repository is available at: https://github.com/0xSlaweekq/MyVpn"
 	echo ""
 
 	# Detect public IPv4 or IPv6 address and pre-fill for the user

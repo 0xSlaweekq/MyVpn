@@ -13,7 +13,7 @@ sudo chown -R "$USER":"$USER" ~/.npm
 sudo chown -R "$USER":"$USER" ~/.nvm
 npm i -g pm2@latest nodemon serve
 sudo npm i -g pm2@latest nodemon serve
-clear && nvm ls
+nvm ls
 
 echo '#################################################################'
 echo "NVM & npm installed"
