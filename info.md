@@ -114,7 +114,7 @@ sudo netfilter-persistent save
 
 ### Ставим Pihole для блокировки рекламы.
 ```
-curl -sSL https://install.pi-hole.net | bash
+sudo curl -sSL https://install.pi-hole.net | bash
 ```
 
 #### После запуска скрипта выбираем виртуальный интерфейс нашего wireguard - wg0. Далее жмем Enter и в конце сохраняем пароль для веб интерфейса программы.

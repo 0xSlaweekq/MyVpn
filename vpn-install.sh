@@ -1,5 +1,5 @@
 # cd ~ && \
-# curl -O https://raw.githubusercontent.com/0xSlaweekq/setup/main/vpn/vpn-install.sh
+# curl -O https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/vpn-install.sh
 # chmod +x vpn-install.sh
 # sudo ./vpn-install.sh
 # echo "First add new user"
@@ -19,6 +19,7 @@
 echo '#################################################################'
 echo "Updating system"
 echo '#################################################################'
+cd ~
 tee -a ~/.bashrc <<< \
 '
 alias si="sudo apt install -y"
@@ -38,77 +39,12 @@ echo '#################################################################'
 echo "Updating system completed"
 echo '#################################################################'
 
-
-echo "Install NVM & npm"
-echo '#################################################################'
-cd ~
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-source ~/.bashrc
-nvm ls-remote
-VERSION=20.13.1
-nvm install $VERSION
-nvm use $VERSION
-nvm alias default $VERSION
-sudo chown -R "$USER":"$USER" ~/.npm
-sudo chown -R "$USER":"$USER" ~/.nvm
-npm i -g pm2@latest nodemon serve
-sudo npm i -g pm2@latest nodemon serve
-clear && nvm ls
-echo '#################################################################'
-echo "NVM & npm installed"
-echo '#################################################################'
+curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | bash
+curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/3proxy-uninstall.sh | bash
+curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | bash
+curl -o-  https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/outline-install.sh| bash
 
 
-echo "Installing 3proxy"
-echo '#################################################################'
-cd ~
-curl -O https://raw.githubusercontent.com/0xSlaweekq/setup/main/vpn/3proxy-install.sh
-curl -O https://raw.githubusercontent.com/0xSlaweekq/setup/main/vpn/3proxy-uninstall.sh
-chmod +x 3proxy-install.sh
-chmod +x 3proxy-uninstall.sh
-sudo ./3proxy-install.sh
-echo '#################################################################'
-echo '3proxy installed'
-echo '#################################################################'
-
-echo "Installing Docker"
-echo '#################################################################'
-if [[ $(which docker) && $(docker --version) && $(docker compose) ]]; then
-   echo 'Docker installed, continue...'
-else
-echo 'Docker NOT installed, continue...'
-sudo apt autoremove $(dpkg -l *docker* |grep ii |awk '{print $2}') -y
-
-curl -sSL https://get.docker.com | sh &&\
-  sudo usermod -aG docker $(whoami) &&\
-  sudo gpasswd -a $USER docker
-
-sudo systemctl restart docker
-sudo systemctl enable --now \
-  docker docker.service docker.socket containerd containerd.service
-sudo systemctl daemon-reload
-systemctl status docker.service
-
-echo '#################################################################'
-echo 'Docker installed'
-echo '#################################################################'
-fi
-
-
-echo "Installing Outline"
-echo '#################################################################'
-sudo ufw allow 443/tcp
-sudo ufw allow 8080/tcp
-sudo ufw allow 22/tcp
-sudo ufw allow 39885/tcp
-sudo ufw allow 1586/tcp
-sudo ufw allow 1586/udp
-
-sudo wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh | bash
-
-
-echo '#################################################################'
-echo "Outline installed"
 echo '#################################################################'
 echo "After all installs and configs run: sudo reboot now"
 echo '#################################################################'
