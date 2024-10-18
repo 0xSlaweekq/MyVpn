@@ -1,43 +1,58 @@
-# #### then on my local pc init ssh key
-# echo '#################################################################'
-# If no ssh keys
-# sudo ufw allow ssh
-# cd ~
-# mkdir -p ~/.ssh
-# chmod 700 ~/.ssh
-# cd ~/.ssh
-# ssh-keygen -t ed25519 -C "plakidin.vyacheslav@mail.ru"
-# chmod 600 ~/.ssh/id_ed25519
-# chmod 600 ~/.ssh/id_ed25519.pub
-# cd -
-# eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
-# ssh-copy-id -i ~/.ssh/id_ed25519.pub msi@64.227.69.234 # pswd user->enter
-# #### after connect to droplet
-# echo '#################################################################'
-# ssh 64.227.69.234
-# check adding keys
-# sudo nano ~/.ssh/authorized_keys
-# edit config
-# sudo nano /etc/ssh/sshd_config
+### then on my local pc init ssh key
+If no ssh keys
+```
+sudo ufw allow ssh
+cd ~
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+cd ~/.ssh
+ssh-keygen -t ed25519 -C "plakidin.vyacheslav@mail.ru"
+chmod 600 ~/.ssh/id_ed25519
+chmod 600 ~/.ssh/id_ed25519.pub
+cd -
+eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
+ssh-copy-id -i ~/.ssh/id_ed25519.pub msi@64.227.69.234 pswd user->enter
+```
+### after connect to droplet
+`ssh 64.227.69.234`
+
+### check adding keys
+
+```
+sudo nano ~/.ssh/authorized_keys
+// edit config
+sudo nano /etc/ssh/sshd_config
+```
+```
 # PermitRootLogin no
 # PubkeyAuthentication yes
 # AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
 # PasswordAuthentication no
 # PermitEmptyPasswords no ???
 # sudo systemctl restart sshd
-#### Node.js
-# echo '#################################################################'
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-# source ~/.bashrc
-# nvm list-remote
-# nvm install v16.17.0
-# nvm list
-# npm install -g npm@9.5.0
-# nvm use v16.17.0
-# sudo npm i -g pm2@latest
-# echo '#################################################################'
-#### npm service
-# echo '#################################################################'
+```
+
+### Install NVM & npm
+
+```
+cd ~
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+source ~/.bashrc
+nvm ls-remote
+VERSION=20.13.1
+nvm install $VERSION
+nvm use $VERSION
+nvm alias default $VERSION
+sudo chown -R "$USER":"$USER" ~/.npm
+sudo chown -R "$USER":"$USER" ~/.nvm
+npm i -g pm2@latest nodemon serve
+sudo npm i -g pm2@latest nodemon serve
+nvm ls
+```
+
+
+### npm service
+```
 # git clone git@github.com:0xSlaweekq/newton-bot.git && cd ./newton-bot
 # sudo npm i
 # sudo pm2 start bot.js
@@ -52,34 +67,41 @@
 # sudo pm2 list
 # sudo pm2 info app_name
 # sudo pm2 monit
-# echo '#################################################################'
+```
 
 
-# https://habr.com/ru/articles/594877/
 
+
+
+### https://habr.com/ru/articles/594877/
+
+```
 echo "Installing DNS-proxy"
-echo "echo '#################################################################'"
+echo "
+
+"
 git clone https://github.com/AdguardTeam/dnsproxy.git \
   && cd dnsproxy \
   && go build -mod=vendor
 
 ./dnsproxy -u sdns://AgcAAAAAAAAABzEuMC4wLjGgENk8mGSlIfMGXMOlIlCcKvq7AVgcrZxtjon911-ep0cg63Ul-I8NlFj4GplQGb_TTLiczclX57DvMV8Q-JdjgRgSZG5zLmNsb3VkZmxhcmUuY29tCi9kbnMtcXVlcnk
+```
 
+### Этот ключ берется с инструкции проекта dnsproxy на github.com https://github.com/AdguardTeam/dnsproxy при желании можно указать другие виды шифрования, примеры указаны там же.
 
-# Этот ключ берется с инструкции проекта dnsproxy на github.com https://github.com/AdguardTeam/dnsproxy при желании можно указать другие виды шифрования, примеры указаны там же.
+### Затем правила для рекурсивного DNS:
 
-# Затем правила для рекурсивного DNS:
-
+```
 sudo iptables -A INPUT -s 10.20.20.0/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-
 sudo iptables -A INPUT -s 10.20.20.0/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j A
+```
 
 
+### Виртуальные ip адреса 10.20.20.0/24 меняем, на адрес вашей подсети Wirguard.
 
-# Виртуальные ip адреса 10.20.20.0/24 меняем, на адрес вашей подсети Wirguard.
+### Чтобы сохранить маршруты ставим и настраиваем iptables-persistent
 
-# Чтобы сохранить маршруты ставим и настраиваем iptables-persistent
-
+```
 sudo apt install -y iptables-persistent
 
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
@@ -87,15 +109,15 @@ echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo deb
 sudo apt install -y iptables-persistent -y
 sudo systemctl enable netfilter-persistent
 sudo netfilter-persistent save
+```
 
 
-
-# Ставим Pihole для блокировки рекламы.
-
+### Ставим Pihole для блокировки рекламы.
+```
 curl -sSL https://install.pi-hole.net | bash
+```
 
-
-# После запуска скрипта выбираем виртуальный интерфейс нашего wireguard - wg0. Далее жмем Enter и в конце сохраняем пароль для веб интерфейса программы.
+#### После запуска скрипта выбираем виртуальный интерфейс нашего wireguard - wg0. Далее жмем Enter и в конце сохраняем пароль для веб интерфейса программы.
 
 
 
@@ -111,6 +133,7 @@ curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.cache
 nano /etc/unbound/unbound.conf.d/pi-hole.conf
 # Туда копируем эту конфигурацию:
 
+```
 server:
      # if no logfile is specified, syslog is used
      # logfile: "/var/log/unbound/unbound.log"
@@ -177,6 +200,8 @@ server:
      private-address: 10.0.0.0/8
      private-address: fd00::/8
      private-address: fe80::/10
+```
+
 # Виртуальный адрес access-control: 10.20.20.0/24 меняем на адрес своей подсети!
 
 # Ребутим сервер командой reboot и проверяем работу DNS сервера командами:

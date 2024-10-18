@@ -34,6 +34,24 @@ sudo apt autoclean -y
 sudo apt autoremove --purge
 sudo apt install -y git nano resolvconf curl wireguard wireguard-tools
 
+
+echo "Install NVM & npm"
+echo '#################################################################'
+cd ~
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+source ~/.bashrc
+nvm ls-remote
+VERSION=20.13.1
+nvm install $VERSION
+nvm use $VERSION
+nvm alias default $VERSION
+sudo chown -R "$USER":"$USER" ~/.npm
+sudo chown -R "$USER":"$USER" ~/.nvm
+npm i -g pm2@latest nodemon serve
+sudo npm i -g pm2@latest nodemon serve
+clear && nvm ls
+
+
 echo "Installing 3proxy"
 echo '#################################################################'
 cd ~
@@ -43,13 +61,23 @@ chmod +x 3proxy-install.sh
 chmod +x 3proxy-uninstall.sh
 sudo ./3proxy-install.sh
 
-sudo reboot now
 
 echo "Installing Docker"
 echo '#################################################################'
-curl -sSL https://get.docker.com | sh \
-  sudo usermod -aG docker $(whoami) \
-  exit
+if [[ $(which docker) && $(docker --version) && $(docker compose) ]]; then
+   echo 'Docker installed, continue...'
+else
+curl -sSL https://get.docker.com | sh &&\
+  sudo usermod -aG docker $(whoami) &&\
+  sudo gpasswd -a $USER docker
+
+sudo systemctl restart docker
+sudo systemctl enable --now \
+  docker docker.service docker.socket containerd containerd.service
+sudo systemctl daemon-reload
+systemctl status docker.service
+fi
+
 
 echo "Installing Outline"
 echo '#################################################################'
@@ -61,6 +89,11 @@ sudo ufw allow 1586/tcp
 sudo ufw allow 1586/udp
 
 sudo wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh | bash
+
+
+echo '#################################################################'
+echo "After all installs and configs run: sudo reboot now"
+echo '#################################################################'
 
 # wget https://s3.amazonaws.com/outline-releases/manager/linux/stable/Outline-Manager.AppImage
 # wget https://s3.amazonaws.com/outline-releases/client/linux/stable/Outline-Client.AppImage
