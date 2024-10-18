@@ -39,10 +39,10 @@ echo '#################################################################'
 echo "Updating system completed"
 echo '#################################################################'
 
-wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | bash
-wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/3proxy-uninstall.sh | bash
-wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | bash
-wget -qO- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/outline-install.sh| bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/3proxy-uninstall.sh | bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/outline-install.sh| bash
 
 
 echo '#################################################################'
