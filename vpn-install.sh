@@ -16,6 +16,7 @@
 # PermitEmptyPasswords no ???
 # sudo systemctl restart sshd
 
+echo '#################################################################'
 echo "Updating system"
 echo '#################################################################'
 tee -a ~/.bashrc <<< \
@@ -33,6 +34,9 @@ sudo apt install --fix-broken -y
 sudo apt autoclean -y
 sudo apt autoremove --purge
 sudo apt install -y git nano resolvconf curl wireguard wireguard-tools
+echo '#################################################################'
+echo "Updating system completed"
+echo '#################################################################'
 
 
 echo "Install NVM & npm"
@@ -50,6 +54,9 @@ sudo chown -R "$USER":"$USER" ~/.nvm
 npm i -g pm2@latest nodemon serve
 sudo npm i -g pm2@latest nodemon serve
 clear && nvm ls
+echo '#################################################################'
+echo "NVM & npm installed"
+echo '#################################################################'
 
 
 echo "Installing 3proxy"
@@ -60,13 +67,18 @@ curl -O https://raw.githubusercontent.com/0xSlaweekq/setup/main/vpn/3proxy-unins
 chmod +x 3proxy-install.sh
 chmod +x 3proxy-uninstall.sh
 sudo ./3proxy-install.sh
-
+echo '#################################################################'
+echo '3proxy installed'
+echo '#################################################################'
 
 echo "Installing Docker"
 echo '#################################################################'
 if [[ $(which docker) && $(docker --version) && $(docker compose) ]]; then
    echo 'Docker installed, continue...'
 else
+echo 'Docker NOT installed, continue...'
+sudo apt autoremove $(dpkg -l *docker* |grep ii |awk '{print $2}') -y
+
 curl -sSL https://get.docker.com | sh &&\
   sudo usermod -aG docker $(whoami) &&\
   sudo gpasswd -a $USER docker
@@ -76,6 +88,10 @@ sudo systemctl enable --now \
   docker docker.service docker.socket containerd containerd.service
 sudo systemctl daemon-reload
 systemctl status docker.service
+
+echo '#################################################################'
+echo 'Docker installed'
+echo '#################################################################'
 fi
 
 
@@ -91,6 +107,8 @@ sudo ufw allow 1586/udp
 sudo wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh | bash
 
 
+echo '#################################################################'
+echo "Outline installed"
 echo '#################################################################'
 echo "After all installs and configs run: sudo reboot now"
 echo '#################################################################'
