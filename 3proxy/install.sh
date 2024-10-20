@@ -2,7 +2,7 @@
 
 echo Updating system
 echo '#################################################################'
-sudo apt install -y git wget nano resolvconf curl build-essential gcc make
+sudo apt install -y wget nano curl build-essential gcc make
 
 echo "Download and unpack the sources"
 cd ~

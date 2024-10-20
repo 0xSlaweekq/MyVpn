@@ -98,7 +98,7 @@ sudo sysctl -p
 # Step 5: Start and Enable OpenVPN
 sudo systemctl start openvpn@server
 sudo systemctl enable openvpn@server
-sudo systemctl status openvpn@server
+# sudo systemctl status openvpn@server
 # Step 6: Configure Firewall
 sudo ufw allow OpenVPN
 sudo ufw disable

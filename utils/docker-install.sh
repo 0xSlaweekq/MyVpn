@@ -16,7 +16,6 @@ sudo systemctl restart docker
 sudo systemctl enable --now \
   docker docker.service docker.socket containerd containerd.service
 sudo systemctl daemon-reload
-systemctl status docker.service
 
 echo '#################################################################'
 echo 'Docker installed'

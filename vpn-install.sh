@@ -34,16 +34,40 @@ sudo apt upgrade -y
 sudo apt install --fix-broken -y
 sudo apt autoclean -y
 sudo apt autoremove --purge
-sudo apt install -y git nano resolvconf curl wireguard wireguard-tools
+sudo apt install -y \
+  git nano curl wget build-essential gcc make
 echo '#################################################################'
 echo "Updating system completed"
 echo '#################################################################'
 
-curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | bash
-curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/3proxy-uninstall.sh | bash
-curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | bash
-curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/outline-install.sh| bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | sudo bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | sudo bash
 
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/install.sh | sudo bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3x-ui/install.sh | sudo bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/install.sh | sudo bash -s -- --api-port 37280 --keys-port 58628
+
+
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 8080/tcp
+
+# 3proxy
+sudo ufw allow 3128/tcp
+sudo ufw allow 3128/udp
+sudo ufw allow 2525/tcp
+sudo ufw allow 2525/udp
+
+# 3xui
+sudo ufw allow 2053/tcp
+sudo ufw allow 2053/udp
+sudo ufw allow 3333/tcp
+sudo ufw allow 3333/udp
+
+# outline
+sudo ufw allow 37280/tcp
+sudo ufw allow 58628/tcp
+sudo ufw allow 58628/udp
 
 echo '#################################################################'
 echo "After all installs and configs run: sudo reboot now"
