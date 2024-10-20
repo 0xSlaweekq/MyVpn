@@ -4,6 +4,7 @@
 # alias defpass="echo 'YOUR_DOCKER_PASS"
 # alias doccon="docker login -u YOUR_DOCKER_USER_NAME --password-stdin"
 # defpass | doccon
+# docker image prune -af
 
 IMAGES=''3proxy' '3x-ui' 'outline''
 
