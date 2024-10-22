@@ -36,10 +36,10 @@ delivered in a container.
 - `--restart=always` restart on crash or server reboot
 - `--name nginxui` give the container a name
 - `-v /etc/nginx:/etc/nginx` map the hosts nginx directory into the container
-- `-p 9000:9000` map host port 9000 to docker container port 9000
+- `-p 9001:9001` map host port 9001 to docker container port 9001
 
 ```bash
-docker run -d --restart=always --name nginxui -v /etc/nginx:/etc/nginx -p 9000:9000 slaweekq/nginx-ui-no-auth:latest
+docker run -d --restart=always --name nginxui -v /etc/nginx:/etc/nginx -p 9001:9001 slaweekq/nginx-ui-no-auth:latest
 ```
 
 ### Docker
@@ -54,7 +54,7 @@ services:
   nginx-ui:
     image: slaweekq/nginx-ui-no-auth:latest
     ports:
-      - 9000:9000
+      - 9001:9001
     volumes:
       - nginx:/etc/nginx
 ```
@@ -90,7 +90,7 @@ Here is how this can be done when using nginx.
 
 ### Configure nginx
 
-The following example adds basic auth to our nginxui app running in a docker container with a mapped port 9000.
+The following example adds basic auth to our nginxui app running in a docker container with a mapped port 9001.
 In this case, it will be accessible via nginx.mydomain.com
 
 ```none
@@ -98,7 +98,7 @@ server {
     server_name nginx.mydomain.com;
 
     location / {
-        proxy_pass http://127.0.0.1:9000/;
+        proxy_pass http://127.0.0.1:9001/;
     }
 
     auth_basic "nginxui secured";

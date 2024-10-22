@@ -69,7 +69,7 @@ curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/install
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp
 sudo ufw allow 8080/tcp
-sudo ufw allow 9000/tcp
+sudo ufw allow 9001/tcp
 
 # 3proxy
 sudo ufw allow 3128/tcp

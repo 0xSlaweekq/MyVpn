@@ -66,7 +66,7 @@ docker pull slaweekq/nginx-ui-no-auth:latest && \
   --restart=always \
   --name nginxui \
   -v /etc/nginx:/etc/nginx \
-  -p 9000:9000 \
+  -p 9001:9001 \
   slaweekq/nginx-ui-no-auth:latest
 ```
 

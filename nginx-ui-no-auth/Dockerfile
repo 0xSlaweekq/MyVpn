@@ -12,5 +12,5 @@ ENV HOME /webapp
 WORKDIR /webapp
 
 ENTRYPOINT ["uwsgi"]
-EXPOSE 9000
-CMD ["--http", "0.0.0.0:9000", "--wsgi-file", "wsgi.py", "--callable", "app", "--processes", "1", "--threads", "8"]
+EXPOSE 9001
+CMD ["--http", "0.0.0.0:9001", "--wsgi-file", "wsgi.py", "--callable", "app", "--processes", "1", "--threads", "8"]
