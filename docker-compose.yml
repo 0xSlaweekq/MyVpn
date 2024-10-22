@@ -41,6 +41,24 @@ services:
     networks:
       my-vpn:
 
+  # myvpn:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: myvpn
+  #   hostname: myvpn
+  #   ports:
+  #     - "3128:3128/tcp"
+  #     - "2525:2525/udp"
+  #     - "2053:2053/tcp"
+  #     - "5555:5555/tcp"
+  #     - "37280:37280/tcp"
+  #     - "58628:58628/tcp"
+  #     - "58628:58628/udp"
+  #   restart: unless-stopped
+  #   networks:
+  #     my-vpn:
+
 networks:
   my-vpn:
     driver: bridge

@@ -6,7 +6,7 @@
 # defpass | doccon
 # docker image prune -af
 
-IMAGES=''3proxy' '3x-ui' 'outline''
+IMAGES=''3proxy' '3x-ui' 'outline' 'nginx-ui-no-auth''
 
 for image in $IMAGES
 do

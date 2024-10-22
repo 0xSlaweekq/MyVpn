@@ -8,13 +8,21 @@
 # su - msi
 # sudo nano ~/.ssh/authorized_keys
 # edit config
-# sudo nano /etc/ssh/sshd_config
-# PermitRootLogin no
+# sudo tee -a /etc/ssh/ssh_config <<< \
+# "    ForwardAgent yes
+#     PasswordAuthentication no
+#     IdentityFile ~/.ssh/id_ed25519
+#     IdentitiesOnly yes"
+
+# ???
+# sudo tee -a /etc/ssh/sshd_config <<< \
+# "PermitRootLogin no
 # PubkeyAuthentication yes
 # AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
 # PasswordAuthentication no
 # PermitEmptyPasswords no ???
-# sudo systemctl restart sshd
+# sudo systemctl restart sshd"
+# ???
 
 echo '#################################################################'
 echo "Updating system"
@@ -28,7 +36,17 @@ alias srn="sudo reboot now"
 alias srp="sudo apt remove --purge -y"
 alias sdr="sudo systemctl daemon-reload"
 alias supd="sudo apt update && sudo apt upgrade -y && sudo apt install --fix-broken -y && sudo apt autoremove -y && sudo apt autoclean -y"
+
+alias dexec="docker exec -it"
+alias docker-compose="docker compose"
+alias dstart="docker-compose up -d"
+alias dstop="docker-compose down -v && docker-compose rm -sfv"
+alias dstopall="docker-compose down --rmi=all -v --remove-orphans && docker rmi $(docker images -q --no-trunc) || true"
+alias dres="dstop && clear && docker-compose up"
+alias dreb="dres -d"
 '
+source ~/.bashrc
+
 sudo apt update
 sudo apt upgrade -y
 sudo apt install --fix-broken -y
@@ -51,6 +69,7 @@ curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/install
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp
 sudo ufw allow 8080/tcp
+sudo ufw allow 9000/tcp
 
 # 3proxy
 sudo ufw allow 3128/tcp
