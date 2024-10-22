@@ -8,9 +8,11 @@ curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/vpn-install.sh 
 
 ### 3proxy
 
-```
+```BASH
 docker pull slaweekq/3proxy:latest && \
   docker run -d --tty \
+  --restart=always \
+  --name 3proxy \
   -p 3128:3128 \
   -p 2525:2525 \
   slaweekq/3proxy:latest
@@ -21,6 +23,8 @@ docker pull slaweekq/3proxy:latest && \
 ```BASH
 docker pull slaweekq/3x-ui:latest && \
   docker run -d --tty \
+  --restart=always \
+  --name 3x-ui \
   -p 2053:2053 \
   -p 5555:5555 \
   slaweekq/3x-ui:latest
@@ -31,6 +35,8 @@ docker pull slaweekq/3x-ui:latest && \
 ```BASH
 docker pull slaweekq/outline:latest && \
   docker run -d --tty \
+  --restart=always \
+  --name outline \
   -p 37280:37280 \
   -p 58628:58628 \
   slaweekq/outline:latest
@@ -41,6 +47,8 @@ docker pull slaweekq/outline:latest && \
 ```BASH
 docker pull slaweekq/myvpn:latest && \
   docker run -d --tty \
+  --restart=always \
+  --name myvpn \
   -p 3128:3128 \
   -p 2525:2525 \
   -p 2053:2053 \
@@ -48,6 +56,18 @@ docker pull slaweekq/myvpn:latest && \
   -p 37280:37280 \
   -p 58628:58628 \
   slaweekq/myvpn:latest
+```
+
+## nginx-ui-no-auth
+
+```BASH
+docker pull slaweekq/nginx-ui-no-auth:latest && \
+  docker run -d --tty \
+  --restart=always \
+  --name nginxui \
+  -v /etc/nginx:/etc/nginx \
+  -p 9000:9000 \
+  slaweekq/nginx-ui-no-auth:latest
 ```
 
 
