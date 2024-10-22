@@ -6,7 +6,7 @@
 # defpass | doccon
 # docker image prune -af
 
-IMAGES=''3proxy' '3x-ui' 'outline' 'nginx-ui-no-auth''
+IMAGES=''nginx-ui-no-auth''
 
 for image in $IMAGES
 do
@@ -16,10 +16,3 @@ do
 
   "
 done
-
-
-echo "Start building and push myvpn"
-docker buildx build -f ./Dockerfile -t slaweekq/myvpn:latest --push .
-echo "Successfily pulled image: slaweekq/myvpn:latest, 3proxy, 3x-ui and outline
-
-"

@@ -36,14 +36,6 @@ alias srn="sudo reboot now"
 alias srp="sudo apt remove --purge -y"
 alias sdr="sudo systemctl daemon-reload"
 alias supd="sudo apt update && sudo apt upgrade -y && sudo apt install --fix-broken -y && sudo apt autoremove -y && sudo apt autoclean -y"
-
-alias dexec="docker exec -it"
-alias docker-compose="docker compose"
-alias dstart="docker-compose up -d"
-alias dstop="docker-compose down -v && docker-compose rm -sfv"
-alias dstopall="docker-compose down --rmi=all -v --remove-orphans && docker rmi $(docker images -q --no-trunc) || true"
-alias dres="dstop && clear && docker-compose up"
-alias dreb="dres -d"
 '
 source ~/.bashrc
 
