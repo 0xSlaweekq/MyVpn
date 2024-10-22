@@ -53,7 +53,7 @@ echo '#################################################################'
 curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | sudo bash
 curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | sudo bash
 
-curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/install.sh | sudo bash
+# curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/install.sh | sudo bash
 curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3x-ui/install.sh | sudo bash
 curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/outline/install.sh | sudo bash -s -- --api-port 37280 --keys-port 58628
 
@@ -72,8 +72,8 @@ sudo ufw allow 2525/udp
 # 3xui
 sudo ufw allow 2053/tcp
 sudo ufw allow 2053/udp
-sudo ufw allow 5555/tcp
-sudo ufw allow 5555/udp
+sudo ufw allow 3333/tcp
+sudo ufw allow 3333/udp
 
 # outline
 sudo ufw allow 37280/tcp
