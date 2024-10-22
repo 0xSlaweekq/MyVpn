@@ -61,8 +61,8 @@ sudo ufw allow 2525/udp
 # 3xui
 sudo ufw allow 2053/tcp
 sudo ufw allow 2053/udp
-sudo ufw allow 3333/tcp
-sudo ufw allow 3333/udp
+sudo ufw allow 5555/tcp
+sudo ufw allow 5555/udp
 
 # outline
 sudo ufw allow 37280/tcp

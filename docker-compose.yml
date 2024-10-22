@@ -22,7 +22,7 @@ services:
     hostname: 3x-ui
     ports:
       - "2053:2053/tcp"
-      - "3333:3333/tcp"
+      - "5555:5555/tcp"
     restart: unless-stopped
     networks:
       my-vpn:

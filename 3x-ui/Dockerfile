@@ -14,4 +14,4 @@ RUN apt autoclean -y &&\
 
 RUN curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3x-ui/install.sh | bash
 
-EXPOSE 2053 3333
+EXPOSE 2053 5555

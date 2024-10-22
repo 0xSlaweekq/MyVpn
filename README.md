@@ -22,7 +22,7 @@ docker pull slaweekq/3proxy:latest && \
 docker pull slaweekq/3x-ui:latest && \
   docker run -d --tty \
   -p 2053:2053 \
-  -p 3333:3333 \
+  -p 5555:5555 \
   slaweekq/3x-ui:latest
 ```
 
@@ -44,7 +44,7 @@ docker pull slaweekq/myvpn:latest && \
   -p 3128:3128 \
   -p 2525:2525 \
   -p 2053:2053 \
-  -p 3333:3333 \
+  -p 5555:5555 \
   -p 37280:37280 \
   -p 58628:58628 \
   slaweekq/myvpn:latest
