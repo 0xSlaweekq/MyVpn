@@ -1,12 +1,13 @@
 #!/bin/bash
 
-echo "Installing Docker"
+echo '#### Installing Docker'
 echo '#################################################################'
 if [[ $(which docker) && $(docker --version) && $(docker compose) ]]; then
    echo 'Docker installed, continue...'
 else
 echo 'Docker NOT installed, continue...'
 sudo apt autoremove $(dpkg -l *docker* |grep ii |awk '{print $2}') -y
+sudo apt install -y ca-certificates curl gnupg lsb-release
 
 curl -sSL https://get.docker.com | sh &&\
   sudo usermod -aG docker $(whoami) &&\
@@ -18,6 +19,6 @@ sudo systemctl enable --now \
 sudo systemctl daemon-reload
 
 echo '#################################################################'
-echo 'Docker installed'
+echo '#### Docker installed'
 echo '#################################################################'
 fi
