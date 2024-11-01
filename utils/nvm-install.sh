@@ -5,7 +5,10 @@ echo '#################################################################'
 # Install nvm
 cd ~
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-source ~/.bashrc
+
+# Get nvm in current session
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # List of availible versions Node.js
 nvm ls-remote
