@@ -50,7 +50,7 @@ echo '#################################################################'
 echo "Updating system completed"
 echo '#################################################################'
 
-curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | sudo bash
+curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/nvm-install.sh | sudo bash -i
 curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/docker-install.sh | sudo bash
 
 # curl -o- https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/3proxy/install.sh | sudo bash
