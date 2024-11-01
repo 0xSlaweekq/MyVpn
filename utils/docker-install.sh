@@ -18,6 +18,7 @@ sudo systemctl enable --now \
   docker docker.service docker.socket containerd containerd.service
 sudo systemctl daemon-reload
 
+source ~/.bashrc
 echo '#################################################################'
 echo '#### Docker installed'
 echo '#################################################################'
