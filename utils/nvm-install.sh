@@ -4,7 +4,7 @@ echo "Install NVM & npm"
 echo '#################################################################'
 # Install nvm
 cd ~
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | sudo bash -i
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | sudo bash
 source ~/.bashrc
 
 # List of availible versions Node.js
