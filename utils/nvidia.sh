@@ -23,7 +23,7 @@ sudo apt install -y \
   libglu1-mesa-dev libfreeimage-dev libglfw3-dev libgles-dev libgles1 \
   libglvnd-core-dev libglx-dev libopengl-dev
 
-sudo apt install software-properties-gtk # for kde qt, for gnome gtk
+sudo apt install software-properties-qt # for kde qt, for gnome gtk
 
 
 # Get the release version of Ubuntu => 2404
