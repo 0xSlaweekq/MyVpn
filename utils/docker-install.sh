@@ -23,3 +23,6 @@ echo '#################################################################'
 echo '#### Docker installed'
 echo '#################################################################'
 fi
+
+# sudo apt -y -qq install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin
+# deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable

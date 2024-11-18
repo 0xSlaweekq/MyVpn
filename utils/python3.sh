@@ -37,6 +37,10 @@ cd ~
 source ~/.bashrc
 python3 --version
 pip3 --version
+# python3 -m venv ~/myenv
+# source ~/myenv/bin/activate
+# pip install --upgrade pip
+sudo apt install pipx
 pip3 install slither-analyzer pipenv
 pip3 install --upgrade pip
 echo '#### Python3 installed'
