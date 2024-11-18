@@ -14,7 +14,7 @@ sudo apt autoclean -y
 sudo apt clean -y
 
 sudo apt install -y \
-  cpu-checker python3-pip python3-dev python3-virtualenv \
+  cpu-checker python3-pip python3-dev python3-virtualenv pipx \
   python3-venv python-is-python3 python3 python3-full build-essential \
   software-properties-common wget zlib1g-dev libffi-dev libgdbm-dev \
   libnss3-dev libssl-dev libreadline-dev
@@ -37,10 +37,9 @@ cd ~
 source ~/.bashrc
 python3 --version
 pip3 --version
-# python3 -m venv ~/myenv
-# source ~/myenv/bin/activate
-# pip install --upgrade pip
-sudo apt install pipx
+python3 -m venv ~/myenv
+source ~/myenv/bin/activate
+pip install --upgrade pip
 pip3 install slither-analyzer pipenv
 pip3 install --upgrade pip
 echo '#### Python3 installed'
