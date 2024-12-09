@@ -2,10 +2,6 @@
 
 echo '#### Installing Python3'
 echo '#################################################################'
-if [[ $(which --version) && $(python3 --version) && $(pip3 --version) ]]; then
-   echo 'Python3 installed, continue...'
-else
-   echo 'Python3 NOT installed, continue...'
 sudo apt update
 sudo apt upgrade -y
 sudo apt install --fix-broken -y
@@ -30,7 +26,6 @@ pip3 install slither-analyzer pipenv
 pip3 install --upgrade pip
 echo '#### Python3 installed'
 echo '#################################################################'
-fi
 
 
 # git clone https://github.com/crytic/slither
