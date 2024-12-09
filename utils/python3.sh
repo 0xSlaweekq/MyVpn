@@ -19,20 +19,6 @@ sudo apt install -y \
   software-properties-common wget zlib1g-dev libffi-dev libgdbm-dev \
   libnss3-dev libssl-dev libreadline-dev
 
-modprobe kvm
-modprobe kvm_intel
-kvm-ok
-lsmod | grep kvm
-ls -al /dev/kvm
-sudo usermod -aG kvm msi
-
-cd /tmp
-wget https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz
-tar -xf Python-3.11.0.tgz
-cd Python-3.11.0
-./configure --enable-optimizations
-sudo make install
-cd ~
 
 source ~/.bashrc
 python3 --version

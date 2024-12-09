@@ -40,11 +40,11 @@ sudo apt update
 sudo apt full-upgrade -y
 
 sudo apt install --reinstall -y xserver-xorg-video-all xserver-xorg-video-nouveau \
-  xserver-xorg-video-intel xserver-xorg-video-nvidia-555
+  xserver-xorg-video-intel xserver-xorg-video-nvidia-565
 sudo apt-key del 7fa2af80
-sudo apt install -y nvidia-driver-555 nvidia-headless-555 nvidia-dkms-555
+sudo apt install -y nvidia-driver-565 nvidia-headless-565 nvidia-dkms-565
 sudo apt install -y nvidia-settings nvidia-prime
-sudo ubuntu-drivers install nvidia-headless-555 nvidia-dkms-555 nvidia-driver-555
+sudo ubuntu-drivers install nvidia-headless-565 nvidia-dkms-565 nvidia-driver-565
 
 sudo apt install -y \
   libvulkan1:{i386,amd64} mesa-vulkan-drivers:{i386,amd64} libgl1-mesa-dri:{i386,amd64} \
@@ -53,15 +53,15 @@ sudo apt install -y \
 
 # Update and upgrade the system again to ensure all packages are installed correctly
 sudo apt update
-# apt list cuda-toolkit-* | grep -v config
-# sudo apt install -y cuda
-# sudo apt install -y cuda-toolkit nvidia-cuda-toolkit nvidia-gds
-# /usr/local/cuda/bin/nvcc --version
+apt list cuda-toolkit-* | grep -v config
+sudo apt install -y cuda
+sudo apt install -y cuda-toolkit nvidia-cuda-toolkit nvidia-gds
+/usr/local/cuda/bin/nvcc --version
 
-# echo 'export PATH="/usr/bin:/bin:$PATH/usr/local/cuda/bin\${PATH:+:\${PATH}}"' >> ~/.bashrc
-# echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}
-# ' >> ~/.bashrc
-# source ~/.bashrc
+echo 'export PATH="/usr/bin:/bin:$PATH/usr/local/cuda/bin\${PATH:+:\${PATH}}"' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}
+' >> ~/.bashrc
+source ~/.bashrc
 
 sudo prime-select on-demand # nvidia|intel|on-demand|query
 sudo nvidia-xconfig --prime
