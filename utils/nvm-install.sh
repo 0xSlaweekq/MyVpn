@@ -8,20 +8,21 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 
 # Get nvm in current session
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-source ~/.bashrc
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [ -f ~/.bashrc ]; then
+  . ~/.bashrc
+fi
 
-# List of availible versions Node.js
 nvm ls-remote
 
 # Install and use v20.13.1 Node.js
 VERSION=20.13.1
-nvm install $VERSION
-nvm use $VERSION
-nvm alias default $VERSION
+nvm install "$VERSION"
+nvm use "$VERSION"
+nvm alias default "$VERSION"
 
-# Install npm package
-npm i -g npm@10.5.2 pm2 nodemon serve \
+# Install npm packages
+npm i -g npm@10.9.2 pm2 nodemon serve \
   yarn prettier eslint solhint prettier solidity-code-metrics \
   dotenv nx nestjs @nestjs/cli nest-cli nats solc npm-check-updates
 
