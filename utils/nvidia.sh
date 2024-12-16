@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 echo 'Installing Nvidia & other graphics drivers'
 echo '#################################################################'
@@ -11,8 +10,10 @@ sudo rm -rf /etc/X11/xorg.conf /etc/X11/xorg.conf-external-display \
   /etc/systemd/system/nvidia-persistenced.service \
   /lib/modprobe.d/nvidia-installer-* /etc/modprobe.d/nvidia-installer-* \
   /usr/lib/modprobe.d/nvidia-installer-*
-sudo apt remove --purge -y '^cuda-.*' '^nvidia-.*'
-sudo apt autoremove -y
+sudo apt remove --purge -y '^nvidia-.*'
+sudo apt remove --purge -y '^cuda-.*'
+sudo apt autoremove $(dpkg -l *nvidia* |grep ii |awk '{print $2}') -y
+sudo apt autoremove $(dpkg -l *cuda* |grep ii |awk '{print $2}') -y
 sudo nvidia-installer --uninstall
 sudo update-initramfs -u
 
@@ -40,11 +41,11 @@ sudo apt update
 sudo apt full-upgrade -y
 
 sudo apt install --reinstall -y xserver-xorg-video-all xserver-xorg-video-nouveau \
-  xserver-xorg-video-intel xserver-xorg-video-nvidia-560
+  xserver-xorg-video-intel xserver-xorg-video-nvidia-555
 sudo apt-key del 7fa2af80
-sudo apt install -y nvidia-driver-560 nvidia-headless-560 nvidia-dkms-560
+sudo apt install -y nvidia-driver-555 nvidia-headless-555 nvidia-dkms-555
 sudo apt install -y nvidia-settings nvidia-prime
-sudo ubuntu-drivers install nvidia-headless-560 nvidia-dkms-560 nvidia-driver-560
+sudo ubuntu-drivers install nvidia-headless-555 nvidia-dkms-555 nvidia-driver-555
 
 sudo apt install -y \
   libvulkan1:{i386,amd64} mesa-vulkan-drivers:{i386,amd64} libgl1-mesa-dri:{i386,amd64} \
@@ -53,15 +54,15 @@ sudo apt install -y \
 
 # Update and upgrade the system again to ensure all packages are installed correctly
 sudo apt update
-apt list cuda-toolkit-* | grep -v config
-sudo apt install -y cuda
-sudo apt install -y cuda-toolkit nvidia-cuda-toolkit nvidia-gds
-/usr/local/cuda/bin/nvcc --version
+# apt list cuda-toolkit-* | grep -v config
+# sudo apt install -y cuda
+# sudo apt install -y cuda-toolkit nvidia-cuda-toolkit nvidia-gds
+# /usr/local/cuda/bin/nvcc --version
 
-echo 'export PATH="/usr/bin:/bin:$PATH/usr/local/cuda/bin\${PATH:+:\${PATH}}"' >> ~/.bashrc
-echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}
-' >> ~/.bashrc
-source ~/.bashrc
+# echo 'export PATH="/usr/bin:/bin:$PATH/usr/local/cuda/bin\${PATH:+:\${PATH}}"' >> ~/.bashrc
+# echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}
+# ' >> ~/.bashrc
+# source ~/.bashrc
 
 sudo prime-select on-demand # nvidia|intel|on-demand|query
 sudo nvidia-xconfig --prime
@@ -78,10 +79,8 @@ sudo update-grub2
 sudo systemctl enable nvidia-persistenced
 sudo systemctl start nvidia-persistenced
 sudo systemctl status nvidia-persistenced
-nvidia-smi
 cat /proc/driver/nvidia/version
 
-echo 'Nvidia drivers installed successfully'
 echo '#################################################################'
 
 
