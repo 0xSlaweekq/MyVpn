@@ -24,7 +24,8 @@ nvm alias default "$VERSION"
 # Install npm packages
 npm i -g npm@10.9.2 pm2 nodemon serve \
   yarn prettier eslint solhint prettier solidity-code-metrics \
-  dotenv nx nestjs @nestjs/cli nest-cli nats solc npm-check-updates
+  dotenv nx nestjs @nestjs/cli nest-cli nats solc npm-check-updates \
+  tronbox
 
 # Check installed versions Node.js
 nvm ls

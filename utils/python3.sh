@@ -15,15 +15,10 @@ sudo apt install -y \
   software-properties-common wget zlib1g-dev libffi-dev libgdbm-dev \
   libnss3-dev libssl-dev libreadline-dev
 
-
 source ~/.bashrc
 python3 --version
 pip3 --version
-python3 -m venv ~/myenv
-source ~/myenv/bin/activate
-pip install --upgrade pip
-pip3 install slither-analyzer pipenv
-pip3 install --upgrade pip
+pipx install pipenv
 echo '#### Python3 installed'
 echo '#################################################################'
 
