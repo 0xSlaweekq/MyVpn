@@ -19,6 +19,7 @@ source ~/.bashrc
 python3 --version
 pip3 --version
 pipx install pipenv
+pipx ensurepath
 echo '#### Python3 installed'
 echo '#################################################################'
 

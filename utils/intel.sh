@@ -89,7 +89,6 @@ sudo apt install -y \
   intel-opencl-icd intel-level-zero-gpu level-zero \
   intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 \
   va-driver-all vainfo
-
 sudo update-grub
 
 sudo shutdown -h 0
