@@ -24,6 +24,7 @@ sudo apt install -y \
 sudo apt install software-properties-gtk # for kde qt, for gnome gtk
 
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
+# sudo add-apt-repository -y ppa:oibaf/graphics-drivers
 sudo dpkg --add-architecture i386
 sudo apt update
 sudo apt full-upgrade -y
@@ -75,4 +76,4 @@ flatpak install flathub io.github.seadve.Kooha
 # sudo telinit 3
 # sudo ./NVIDIA-*.run
 # sudo telinit 5
-# systemctl restart graphical.target
+# sudo systemctl restart graphical.target
