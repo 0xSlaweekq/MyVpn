@@ -20,6 +20,7 @@ python3 --version
 pip3 --version
 python3 -m pip config set global.break-system-packages true
 pip install pipenv
+pip3 install --upgrade pip
 echo '#### Python3 installed'
 echo '#################################################################'
 
