@@ -18,8 +18,8 @@ sudo apt install -y \
 source ~/.bashrc
 python3 --version
 pip3 --version
-pipx install pipenv
-pipx ensurepath
+python3 -m pip config set global.break-system-packages true
+pip install pipenv
 echo '#### Python3 installed'
 echo '#################################################################'
 
@@ -30,6 +30,6 @@ echo '#################################################################'
 # make dev
 # source ./env/bin/activate
 
-# python3 -m pip install solc-select
+# python3 -m pip install solc-select slither eralchemy graphviz pygraphviz
 # solc-select install 0.8.25
 # solc-select use 0.8.25
