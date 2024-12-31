@@ -68,8 +68,6 @@ cat /proc/driver/nvidia/version
 # echo $XDG_SESSION_TYPE
 echo '#################################################################'
 
-flatpak install flathub io.github.seadve.Kooha
-
 # cd ~
 # wget https://download.nvidia.com/XFree86/Linux-x86_64/565.77/NVIDIA-Linux-x86_64-565.77.run
 # chmod 700 NVIDIA-*.run
