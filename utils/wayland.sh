@@ -52,7 +52,7 @@ sudo systemctl --user restart pipewire pipewire-pulse
 # Включение Force Full Composition Pipeline для NVIDIA
 echo "Настройка Force Full Composition Pipeline..."
 if command -v nvidia-settings &> /dev/null; then
-    nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }, nvidia-auto-select +1920+0 { ForceCompositionPipeline = On }"
+    nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }, nvidia-auto-select +1920+1080 { ForceCompositionPipeline = On }"
 fi
 
 # if ! grep -q 'Identifier "Intel Graphics"' /etc/X11/xorg.conf.d/20-intel.conf; then
