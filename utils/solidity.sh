@@ -9,6 +9,6 @@ solc --version
 python3 -m pip config set global.break-system-packages true
 python3 -m pipx ensurepath
 pipx ensurepath
-pip install --upgrade solc solc-select slither slither-analyzer eralchemy graphviz pygraphviz
+pip install solc solc-select slither slither-analyzer eralchemy graphviz pygraphviz
 
 echo "Setup completed successfully!"

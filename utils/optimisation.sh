@@ -89,7 +89,7 @@ gamemoded -t
 # apply_gpu_optimisations = 1
 # systemctl --user restart gamemoded
 # mkdir -p ~/.config/systemd/user
-# nano ~/.config/systemd/user/gamemode-gnome.service
+# nano ~/.config/systemd/user/gamemode.service
 # [Unit]
 # Description=GameMode for GNOME Shell
 # After=graphical.target

@@ -49,21 +49,16 @@ sudo flatpak override com.usebottles.bottles --filesystem=~/.local/share/Steam
 # __GL_SHADER_DISK_CACHE=1 to create a shader cache for a game
 # __GL_SHADER_DISK_CACHE_PATH=/path/to/location to set the location for the shader cache.
 
-
 # for .msi files wine msiexec /i
 # for .exe files wine *.exe
-
 
 # mkdir -v ~/.wine-MyApp
 # export WINEPREFIX=~/.wine-MyApp
 # wine winecfg
 
-
 # export WINEPREFIX=~/.wine-MyApp
 # uninstall wine
 # rm -r ~/.wine-MyApp
-
-
 
 # flatpak steam
 # tee -a ~/.var/app/com.valvesoftware.Steam/.steam/steam/steam_dev.cfg <<< \

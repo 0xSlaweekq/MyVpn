@@ -21,7 +21,7 @@ sudo apt install -y \
   libglu1-mesa-dev libfreeimage-dev libglfw3-dev libgles-dev libgles1 \
   libglvnd-core-dev libglx-dev libopengl-dev
 
-sudo apt install software-properties-gtk # for kde qt, for gnome gtk
+sudo apt install software-properties-qt # for kde qt, for gnome gtk
 
 # sudo add-apt-repository -y ppa:graphics-drivers/ppa
 # sudo add-apt-repository -y ppa:oibaf/graphics-drivers
