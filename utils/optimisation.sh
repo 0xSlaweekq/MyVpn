@@ -84,6 +84,23 @@ systemctl --user enable gamemoded && systemctl --user start gamemoded
 sudo chmod +x /usr/bin/gamemoderun
 gamemoded -t
 
+# sudo nano /usr/share/gamemode/gamemode.ini
+# [gpu]
+# apply_gpu_optimisations = 1
+# systemctl --user restart gamemoded
+# mkdir -p ~/.config/systemd/user
+# nano ~/.config/systemd/user/gamemode-gnome.service
+# [Unit]
+# Description=GameMode for GNOME Shell
+# After=graphical.target
+
+# [Service]
+# ExecStart=/usr/bin/gamemoded
+# Restart=always
+
+# [Install]
+# WantedBy=default.target
+
 
 sudo apt install -y powertop
 sudo powertop --auto-tune
