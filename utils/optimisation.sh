@@ -19,11 +19,13 @@ tee -a ~/.local/bin/prime-run <<< \
 export gamemoderun
 export __NV_PRIME_RENDER_OFFLOAD=1
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export GBM_BACKEND=nvidia-drm
+export WLR_NO_HARDWARE_CURSORS=1
 exec "$@"
 '
 chmod +x ~/.local/bin/prime-run
 tee -a ~/.bashrc <<< 'alias primerun="~/.local/bin/prime-run"'
-source ~/.bashrc
+. ~/.bashrc
 
 # Install packages for gnome
 # sudo apt install -y power-profiles-daemon
@@ -101,17 +103,21 @@ gamemoded -t
 # [Install]
 # WantedBy=default.target
 
-
 sudo apt install -y powertop
 sudo powertop --auto-tune
 sudo systemctl enable fstrim.timer
 
 # Настройка intel_pstate для гибридной архитектуры
-echo "Настройка intel_pstate..."
-if ! grep -q "intel_pstate=enable" /etc/default/grub; then
-    sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 intel_pstate=enable"/' /etc/default/grub
-    sudo update-grub
-fi
+# echo "Настройка intel_pstate..."
+# if ! grep -q "intel_pstate=enable" /etc/default/grub; then
+#     sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 intel_pstate=enable"/' /etc/default/grub
+#     sudo update-grub
+# fi
+sudo swapon --show
+sudo swapoff -a
+sudo dd if=/dev/zero of=/swapfile bs=1M count=32768 oflag=append conv=notrunc
+sudo mkswap /swapfile
+sudo swapon /swapfile
 
 # Перезагрузка системы
 echo "Скрипт завершён. Рекомендуется перезагрузить систему для применения изменений. Перезагрузить сейчас? (y/n)"

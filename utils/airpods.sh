@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "Install and settings PipeWire..."
+sudo apt install -y pipewire pipewire-audio-client-libraries
+sudo systemctl --user enable pipewire pipewire-pulse
+sudo systemctl --user restart pipewire pipewire-pulse
+
 echo 'Installing Bluetooth Audio for AirPods'
 echo '#################################################################'
 # sudo apt install -y 'bluez*' blueman

@@ -10,6 +10,7 @@ echo "deb [arch=amd64,i386 signed-by=/usr/share/keyrings/intel-graphics.gpg] htt
 sudo apt update
 
 # Install the compute-related packages
+sudo apt install -y libigdgmm12
 sudo apt install -y libze1 intel-level-zero-gpu intel-opencl-icd clinfo
 sudo apt install -y libze-dev intel-ocloc
 
@@ -24,6 +25,6 @@ sudo apt install -y qemu-kvm qemu-utils \
 
 sudo apt install -y \
   intel-opencl-icd intel-level-zero-gpu level-zero \
-  intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 \
-  va-driver-all vainfo
+  libmfx1 libmfxgen1 libvpl2 va-driver-all vainfo \
+  intel-gpu-tools intel-media-va-driver mesa-utils nvtop
 sudo update-grub

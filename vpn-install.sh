@@ -37,7 +37,7 @@ alias srp="sudo apt remove --purge -y"
 alias sdr="sudo systemctl daemon-reload"
 alias supd="sudo apt update && sudo apt upgrade -y && sudo apt install --fix-broken -y && sudo apt autoremove -y && sudo apt autoclean -y"
 '
-source ~/.bashrc
+. ~/.bashrc
 
 sudo apt update
 sudo apt upgrade -y

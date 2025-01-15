@@ -15,7 +15,7 @@ sudo apt install -y \
   software-properties-common wget zlib1g-dev libffi-dev libgdbm-dev \
   libnss3-dev libssl-dev libreadline-dev
 
-source ~/.bashrc
+. ~/.bashrc
 python3 --version
 pip3 --version
 python3 -m pip config set global.break-system-packages true
@@ -29,7 +29,7 @@ echo '#################################################################'
 # cd slither
 # git checkout dev
 # make dev
-# source ./env/bin/activate
+# . ./env/bin/activate
 
 # python3 -m pip install solc-select slither eralchemy graphviz pygraphviz
 # solc-select install 0.8.25
