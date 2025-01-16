@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 echo "Install and settings PipeWire..."
 sudo apt install -y pipewire pipewire-audio-client-libraries

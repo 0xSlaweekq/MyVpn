@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 sudo mkdir -pm755 /etc/apt/keyrings
 sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key

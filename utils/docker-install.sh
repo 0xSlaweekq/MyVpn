@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 echo '#### Installing Docker'
 echo '#################################################################'
@@ -22,18 +22,10 @@ else
     sudo systemctl enable --now \
       docker docker.service docker.socket containerd containerd.service
     sudo systemctl daemon-reload
-
-    if [ -f ~/.bashrc ]; then
-      . ~/.bashrc
-    fi
+    . ~/.bashrc
 
     echo '#################################################################'
     echo '#### Docker installed successfully'
-    echo '#################################################################'
-
-    # Предупреждение о необходимости перезагрузки
     echo "Please log out and log back in for group changes to take effect."
+    echo '#################################################################'
 fi
-
-# sudo apt -y -qq install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin
-# deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable

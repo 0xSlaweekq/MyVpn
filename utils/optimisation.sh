@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 # curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
 
 
@@ -14,7 +14,7 @@ cat /proc/version
 mkdir ~/.local/bin
 tee -a ~/.local/bin/prime-run <<< \
 '
-#!/bin/bash
+#! /usr/bin/env bash
 
 export gamemoderun
 export __NV_PRIME_RENDER_OFFLOAD=1

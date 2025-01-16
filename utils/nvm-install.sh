@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 echo "Install NVM & npm"
 echo '#################################################################'
@@ -9,23 +9,23 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 # Get nvm in current session
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
-fi
+. ~/.bashrc
 
 nvm ls-remote
 
-# Install and use v20.13.1 Node.js
+# Install and use v22.12.0 Node.js
 VERSION=22.12.0
 nvm install "$VERSION"
-nvm use "$VERSION"
 nvm alias default "$VERSION"
+nvm use "$VERSION"
 
 # Install npm packages
 npm i -g npm@11.0.0
-npm i -g pm2 nodemon serve \
-  yarn corepack prettier eslint solhint prettier solidity-code-metrics \
-  dotenv nx nestjs @nestjs/cli nest-cli nats solc npm-check-updates \
+npm i -g \
+  pm2 nodemon serve yarn corepack prettier eslint \
+  npm-check-updates dotenv \
+  nx nestjs @nestjs/cli nest-cli nats \
+  solc solhint solidity-code-metrics \
   tronbox
 corepack enable
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 cd ~
 wget https://github.com/Castro-Fidel/PortProton_dpkg/releases/download/portproton_1.7-2_amd64/portproton_1.7-2_amd64.deb

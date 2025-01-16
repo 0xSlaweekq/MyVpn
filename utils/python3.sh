@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 echo '#### Installing Python3'
 echo '#################################################################'
@@ -23,14 +23,3 @@ pip install pipenv
 pip3 install --upgrade pip
 echo '#### Python3 installed'
 echo '#################################################################'
-
-
-# git clone https://github.com/crytic/slither
-# cd slither
-# git checkout dev
-# make dev
-# . ./env/bin/activate
-
-# python3 -m pip install solc-select slither eralchemy graphviz pygraphviz
-# solc-select install 0.8.25
-# solc-select use 0.8.25

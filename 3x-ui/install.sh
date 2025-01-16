@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 # curl -o- https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh | # bash
 
 red='\033[0;31m'

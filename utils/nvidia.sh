@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 echo 'Installing Nvidia & other graphics drivers'
 echo '#################################################################'
