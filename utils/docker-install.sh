@@ -12,11 +12,12 @@ else
     sudo apt autoremove -y
 
     sudo apt update && sudo apt install -y \
-        ca-certificates curl gnupg lsb-release
+        ca-certificates curl gnupg lsb-release uidmap
 
     curl -sSL https://get.docker.com | sh &&\
       sudo usermod -aG docker $(whoami) &&\
       sudo gpasswd -a $USER docker
+    dockerd-rootless-setuptool.sh install --force
 
     sudo systemctl restart docker
     sudo systemctl enable --now \
