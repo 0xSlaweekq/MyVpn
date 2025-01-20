@@ -24,9 +24,11 @@ npm i -g npm@11.0.0
 npm i -g \
   pm2 nodemon serve yarn corepack prettier eslint \
   npm-check-updates dotenv \
-  nx nestjs @nestjs/cli nest-cli nats \
-  solc solhint solidity-code-metrics \
-  tronbox
+  nx nestjs @nestjs/cli nest-cli nats
+
+npm i -g \
+  solc solhint solidity-code-metrics tronbox
+
 corepack enable
 
 # Check installed versions Node.js

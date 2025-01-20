@@ -17,13 +17,13 @@ else
     curl -sSL https://get.docker.com | sh &&\
       sudo usermod -aG docker $(whoami) &&\
       sudo gpasswd -a $USER docker
-    dockerd-rootless-setuptool.sh install --force
+#     dockerd-rootless-setuptool.sh install --force
 
     sudo systemctl restart docker
     sudo systemctl enable --now \
       docker docker.service docker.socket containerd containerd.service
     sudo systemctl daemon-reload
-    . ~/.bashrc
+    source ~/.bashrc
 
     echo '#################################################################'
     echo '#### Docker installed successfully'
