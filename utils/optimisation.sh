@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+# dpkg -l | grep linux-image
+# srp linux-image-6.13.4-x64v3-xanmod1
+# sudo update-grub
+# supd
+
 # curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
 wget -qO - https://dl.xanmod.org/gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/xanmod-kernel.gpg
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/xanmod-kernel.gpg] http://deb.xanmod.org releases main" >> /etc/apt/sources.list.d/xanmod-kernel.list'
