@@ -32,7 +32,8 @@ sudo apt full-upgrade -y
 sudo apt install --reinstall -y xserver-xorg-video-all xserver-xorg-video-nouveau \
   xserver-xorg-video-intel xserver-xorg-video-nvidia-565
 sudo apt-key del 7fa2af80
-sudo apt install -y nvidia-driver-565 nvidia-headless-565 nvidia-dkms-565
+sudo apt install -y nvidia-driver-565 nvidia-headless-565 nvidia-dkms-565 \
+  nvidia-utils-565
 sudo apt install -y nvidia-settings nvidia-prime \
   libnvidia-egl-wayland1
 sudo ubuntu-drivers install nvidia-headless-565 nvidia-dkms-565 nvidia-driver-565
