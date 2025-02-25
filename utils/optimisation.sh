@@ -11,7 +11,13 @@ sudo apt install mainline
 
 wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -vo /etc/apt/keyrings/xanmod-kernel.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/xanmod-kernel.gpg] http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
-sudo apt update && sudo apt install -y linux-xanmod-x64v3
+sudo apt update && sudo apt install -y linux-xanmod-lts-x64v3
+# sudo apt install -y \
+#     linux-xanmod-rt-x64v3 \
+#     linux-xanmod-lts-x64v3 \
+#     linux-xanmod-x64v3
+
+sudo update-grub
 
 sudo dpkg --configure -a
 sudo apt install -y -f
