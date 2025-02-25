@@ -5,9 +5,12 @@
 # sudo update-grub
 # supd
 
-# curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
-wget -qO - https://dl.xanmod.org/gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/xanmod-kernel.gpg
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/xanmod-kernel.gpg] http://deb.xanmod.org releases main" >> /etc/apt/sources.list.d/xanmod-kernel.list'
+sudo add-apt-repository -y ppa:cappelikan/ppa
+sudo apt update
+sudo apt install mainline
+
+wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -vo /etc/apt/keyrings/xanmod-kernel.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/xanmod-kernel.gpg] http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
 sudo apt update && sudo apt install -y linux-xanmod-x64v3
 
 sudo dpkg --configure -a
@@ -131,3 +134,21 @@ if [[ $RESTART == "y" || $RESTART == "Y" ]]; then
 else
     echo "Перезагрузите систему позже для применения всех настроек."
 fi
+
+
+# Liquorix Kernel:
+# curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
+# sudo add-apt-repository ppa:liquorix-team/liquorix
+# sudo apt update
+# sudo apt install linux-image-liquorix-amd64
+
+# Zen Kernel:
+# sudo add-apt-repository ppa:teejee2008/ppa
+# sudo apt update
+# sudo apt install linux-zen
+
+# mainline ядро
+# sudo add-apt-repository ppa:teejee2008/ppa
+# sudo apt update
+# sudo apt install ukuu
+# ukuu --install-latest

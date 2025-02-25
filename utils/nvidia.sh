@@ -23,35 +23,35 @@ sudo apt install -y \
 
 sudo apt install software-properties-qt # for kde qt, for gnome gtk
 
-# sudo add-apt-repository -y ppa:graphics-drivers/ppa
+sudo add-apt-repository -y ppa:graphics-drivers/ppa
 # sudo add-apt-repository -y ppa:oibaf/graphics-drivers
+# add arch i386
 sudo dpkg --add-architecture i386
 sudo apt update
 sudo apt full-upgrade -y
 
-sudo apt install --reinstall -y xserver-xorg-video-all xserver-xorg-video-nouveau \
-  xserver-xorg-video-intel xserver-xorg-video-nvidia-565
-sudo apt-key del 7fa2af80
-sudo apt install -y nvidia-driver-565 nvidia-headless-565 nvidia-dkms-565 \
-  nvidia-utils-565
+# sudo apt install --reinstall -y xserver-xorg-video-all xserver-xorg-video-nouveau \
+#   xserver-xorg-video-intel xserver-xorg-video-nvidia-550
+# sudo apt-key del 7fa2af80
+
+# install drivers NVIDIA
+sudo apt install -y nvidia-driver-550 nvidia-headless-550 nvidia-dkms-550 \
+  nvidia-utils-550
 sudo apt install -y nvidia-settings nvidia-prime \
   libnvidia-egl-wayland1
-sudo ubuntu-drivers install nvidia-headless-565 nvidia-dkms-565 nvidia-driver-565
 
+# Installi Vulkan and other graphic libs
 sudo apt install -y \
   libvulkan1:{i386,amd64} mesa-vulkan-drivers:{i386,amd64} libgl1-mesa-dri:{i386,amd64} \
   vkbasalt libglu1-mesa-dev:{i386,amd64} freeglut3-dev mesa-common-dev \
   libopenal1 libopenal-dev libalut0 libalut-dev
 
-# sudo tee -a /etc/sddm.conf.d/kde_settings.conf <<< \
-# '
-# [Wayland]
-# EnableWayland=true
-# Session=plasmawayland
-# '
+# Turn on optimistion for using on-demand
 sudo prime-select on-demand # nvidia|intel|on-demand|query
 sudo nvidia-xconfig --prime
 sh -c "xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto"
+
+# disable nouveau
 sudo bash -c "echo blacklist nouveau >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
 sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
 sudo systemctl daemon-reload
@@ -60,17 +60,24 @@ sudo systemctl daemon-reload
 sudo update-initramfs -u
 sudo update-grub2
 
+# Turn on NVIDIA persistence daemon
 /usr/bin/nvidia-persistenced --verbose
 sudo systemctl enable nvidia-persistenced
 sudo systemctl start nvidia-persistenced
 sudo systemctl status nvidia-persistenced
+
+# Check version driver
 cat /proc/driver/nvidia/version
+
+# Install CUDA (optional)
+# sudo apt install -y nvidia-cuda-toolkit
+
 # nvidia-smi
 # echo $XDG_SESSION_TYPE
 echo '#################################################################'
 
 # cd ~
-# wget https://download.nvidia.com/XFree86/Linux-x86_64/565.77/NVIDIA-Linux-x86_64-565.77.run
+# wget https://download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run
 # chmod 700 NVIDIA-*.run
 # sudo telinit 3
 # sudo ./NVIDIA-*.run
