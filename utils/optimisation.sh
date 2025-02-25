@@ -16,7 +16,8 @@ sudo apt update && sudo apt install -y linux-xanmod-lts-x64v3
 #     linux-xanmod-rt-x64v3 \
 #     linux-xanmod-lts-x64v3 \
 #     linux-xanmod-x64v3
-
+sudo update-initramfs -u
+sudo update-grub2
 sudo update-grub
 
 sudo dpkg --configure -a
