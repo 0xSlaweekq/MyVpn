@@ -114,8 +114,8 @@ sudo apt install -y powertop
 sudo powertop --auto-tune
 sudo systemctl enable fstrim.timer
 
-# Настройка intel_pstate для гибридной архитектуры
-# echo "Настройка intel_pstate..."
+# Setting up intel_pstate for hybrid arch
+# echo "Setting up intel_pstate..."
 # if ! grep -q "intel_pstate=enable" /etc/default/grub; then
 #     sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 intel_pstate=enable"/' /etc/default/grub
 #     sudo update-grub
@@ -126,13 +126,13 @@ sudo dd if=/dev/zero of=/swapfile bs=1M count=32768 oflag=append conv=notrunc
 sudo mkswap /swapfile
 sudo swapon /swapfile
 
-# Перезагрузка системы
-echo "Скрипт завершён. Рекомендуется перезагрузить систему для применения изменений. Перезагрузить сейчас? (y/n)"
+# Reboot system
+echo "All done. Recommendation reboot system, now? (Y/n)"
 read -r RESTART
 if [[ $RESTART == "y" || $RESTART == "Y" ]]; then
     reboot
 else
-    echo "Перезагрузите систему позже для применения всех настроек."
+    echo "Reboot system manual after"
 fi
 
 
@@ -147,7 +147,7 @@ fi
 # sudo apt update
 # sudo apt install linux-zen
 
-# mainline ядро
+# mainline kernel
 # sudo add-apt-repository ppa:teejee2008/ppa
 # sudo apt update
 # sudo apt install ukuu
