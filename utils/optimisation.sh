@@ -5,10 +5,12 @@
 # sudo update-grub
 # supd
 
+echo "🔹 Install mainline kernel..."
 sudo add-apt-repository -y ppa:cappelikan/ppa
 sudo apt update
 sudo apt install mainline
 
+echo "🔹 Install xanmod kernel..."
 wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -vo /etc/apt/keyrings/xanmod-kernel.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/xanmod-kernel.gpg] http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
 sudo apt update && sudo apt install -y linux-xanmod-lts-x64v3
@@ -28,7 +30,7 @@ cat /proc/version
 mkdir ~/.local/bin
 tee -a ~/.local/bin/prime-run <<< \
 '
-#! /usr/bin/env bash
+#!/bin/bash
 
 export gamemoderun
 export __NV_PRIME_RENDER_OFFLOAD=1
@@ -41,27 +43,25 @@ chmod +x ~/.local/bin/prime-run
 tee -a ~/.bashrc <<< 'alias primerun="~/.local/bin/prime-run"'
 source ~/.bashrc
 
-# Install packages for gnome
-# sudo apt install -y power-profiles-daemon
-# powerprofilesctl set performance && powerprofilesctl list
-# Install packages
+echo "🔹 Install packages..."
 sudo add-apt-repository -y ppa:linrunner/tlp
 sudo apt update
 sudo apt install -y tlp tlp-rdw tp-smapi-dkms acpi-call-dkms
 sudo apt install -y gamemode cpufrequtils indicator-cpufreq tlp
 
-# Install auto-cpufreq
-git clone https://github.com/AdnanHodzic/auto-cpufreq.git
-cd auto-cpufreq && sudo ./auto-cpufreq-installer
+echo "🔹 Install auto-cpufreq..."
+ACPU_PATH="/tmp/auto-cpufreq"
+git clone https://github.com/AdnanHodzic/auto-cpufreq.git $ACPU_PATH
+cd $ACPU_PATH && sudo ./auto-cpufreq-installer
 sudo auto-cpufreq --install
 # sudo systemctl mask power-profiles-daemon.service
 sudo systemctl enable --now auto-cpufreq
 sudo systemctl start auto-cpufreq
 sudo systemctl status auto-cpufreq
 sudo auto-cpufreq --update
-cd ~ && rm -rf auto-cpufreq
+cd ~
 
-# Install tlp
+echo "🔹 Install tlp..."
 sudo sh -c 'echo "
 PLATFORM_PROFILE_ON_AC=performance
 PLATFORM_PROFILE_ON_BAT=balanced
@@ -90,50 +90,29 @@ sudo tlp start
 echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils
 sudo systemctl restart cpufrequtils
 
-# Install Gamemode
-git clone https://github.com/FeralInteractive/gamemode.git
-cd gamemode
+echo "🔹 Install Gamemode..."
+GAMEMODE_PATH="/tmp/auto-cpufreq"
+git clone https://github.com/FeralInteractive/gamemode.git $GAMEMODE_PATH
+cd $GAMEMODE_PATH
 git checkout 1.8.1 # omit to build the master branch
 ./bootstrap.sh
-cd ~ && rm -rf ./gamemode
+cd ~
 systemctl --user enable gamemoded && systemctl --user start gamemoded
 sudo chmod +x /usr/bin/gamemoderun
 gamemoded -t
 
-# sudo nano /usr/share/gamemode/gamemode.ini
-# [gpu]
-# apply_gpu_optimisations = 1
-# systemctl --user restart gamemoded
-# mkdir -p ~/.config/systemd/user
-# nano ~/.config/systemd/user/gamemode.service
-# [Unit]
-# Description=GameMode for GNOME Shell
-# After=graphical.target
-
-# [Service]
-# ExecStart=/usr/bin/gamemoded
-# Restart=always
-
-# [Install]
-# WantedBy=default.target
-
+echo "🔹 Install powertop..."
 sudo apt install -y powertop
 sudo powertop --auto-tune
 sudo systemctl enable fstrim.timer
 
-# Setting up intel_pstate for hybrid arch
-# echo "Setting up intel_pstate..."
-# if ! grep -q "intel_pstate=enable" /etc/default/grub; then
-#     sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 intel_pstate=enable"/' /etc/default/grub
-#     sudo update-grub
-# fi
+echo "🔹 Swap on 32GB..."
 sudo swapon --show
 sudo swapoff -a
 sudo dd if=/dev/zero of=/swapfile bs=1M count=32768 oflag=append conv=notrunc
 sudo mkswap /swapfile
 sudo swapon /swapfile
 
-# Reboot system
 echo "All done. Recommendation reboot system, now? (Y/n)"
 read -r RESTART
 if [[ $RESTART == "y" || $RESTART == "Y" ]]; then
