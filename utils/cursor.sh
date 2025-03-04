@@ -1,26 +1,24 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+set -e
 
 installCursor() {
     if ! [ -f /opt/cursor.appimage ]; then
-        echo "Installing Cursor AI IDE..."
+        echo "🔹 Installing Cursor AI IDE..."
 
         # Install curl if not installed
         if ! command -v curl &> /dev/null; then
             echo "curl is not installed. Installing..."
-            sudo apt-get update
-            sudo apt-get install -y curl
+            sudo apt update
+            sudo apt install -y curl
         fi
 
-        # Download Cursor AppImage
         echo "Downloading Cursor AppImage..."
         sudo curl -L https://downloader.cursor.sh/linux/appImage/x64 -o /opt/cursor.appimage
         sudo chmod +x /opt/cursor.appimage
 
-        # Download Cursor icon
         echo "Downloading Cursor icon..."
         sudo curl -L https://raw.githubusercontent.com/rahuljangirwork/copmany-logos/refs/heads/main/cursor.png -o /opt/cursor.png
 
-        # Create a .desktop entry for Cursor
         echo "Creating .desktop entry for Cursor..."
         mkdir -p "$HOME/.local/share/applications"
         bash -c "cat > $HOME/.local/share/applications/cursor.desktop" <<EOL
@@ -50,8 +48,9 @@ EOL
         fi
 
         echo "Cursor AI IDE installation complete. You can find it in your application menu."
+        source "$BASHRC_FILE"
     else
-        echo "Cursor AI IDE is already installed."
+        echo "🔹 Cursor AI IDE is already installed."
     fi
 }
 

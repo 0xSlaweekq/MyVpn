@@ -1,11 +1,32 @@
 #!/usr/bin/env bash
+set -e
 
 echo "🔹 Installing MSI EC (Battery Charge Control)..."
 if ! dkms status | grep -q "msi_ec"; then
-  sudo git clone https://github.com/BeardOverflow/msi-ec.git /tmp/msi-ec
-  cd /tmp/msi-ec || { echo "Failed to enter /tmp/msi-ec directory"; exit 1; }
-  sudo make dkms-install
-  cd ~
+  sudo apt update
+  sudo apt install -y git build-essential dkms
+
+  # Clone repository with proper error handling
+  if [ -d "/tmp/msi-ec" ]; then
+    sudo rm -rf /tmp/msi-ec
+  fi
+
+  sudo git clone https://github.com/BeardOverflow/msi-ec.git /tmp/msi-ec || {
+    echo "Failed to clone msi-ec repository. Exiting."
+    exit 1
+  }
+
+  cd /tmp/msi-ec || {
+    echo "Failed to enter /tmp/msi-ec directory. Exiting."
+    exit 1
+  }
+
+  sudo make dkms-install || {
+    echo "Failed to install MSI EC module. Exiting."
+    exit 1
+  }
+
+  cd "$HOME" || exit 1
 else
   echo "...MSI EC module already installed, skipping..."
 fi
@@ -14,6 +35,7 @@ echo "🔹 Create automatic MSI battery charge control..."
 if [ -f "/usr/local/bin/msi_battery_control.sh" ]; then
   sudo rm -f /usr/local/bin/msi_battery_control.sh
 fi
+
 sudo tee /usr/local/bin/msi_battery_control.sh > /dev/null <<EOL
 #!/bin/bash
 while true; do
@@ -28,12 +50,14 @@ while true; do
   sleep 60
 done
 EOL
+
 sudo chmod +x /usr/local/bin/msi_battery_control.sh
 
 echo "🔹 Setting up automatic battery charge control..."
 if [ -f "/etc/systemd/system/msi-battery.service" ]; then
   sudo rm -f /etc/systemd/system/msi-battery.service
 fi
+
 sudo tee /etc/systemd/system/msi-battery.service > /dev/null <<EOL
 [Unit]
 Description=MSI Smart Battery Control
@@ -136,10 +160,18 @@ else
         exit 1
     }
 
-    cd /tmp/MControlCenter-0.5.0-bin || { echo "Failed to enter MControlCenter directory"; exit 1; }
-    sudo ./install.sh
-    cd ~
+    cd /tmp/MControlCenter-0.5.0-bin || {
+        echo "Failed to enter MControlCenter directory. Exiting."
+        exit 1
+    }
+
+    sudo ./install.sh || {
+        echo "Failed to install MControlCenter. Exiting."
+        exit 1
+    }
+
+    cd "$HOME" || exit 1
 fi
 
 echo "🔹 Installation completed successfully!"
-echo "🔹 Please log out and log back in for the Qt environment to be fully applied."
+echo "🔹 You can now run MControlCenter by typing 'mcontrolcenter' in terminal or finding it in your applications menu."
