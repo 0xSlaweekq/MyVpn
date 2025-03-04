@@ -33,6 +33,16 @@ MimeType=text/plain;
 EOL
 
         xdg-mime default cursor.desktop text/plain
+        xdg-mime default cursor.desktop application/x-shellscript
+        xdg-mime default cursor.desktop text/x-script.python
+        xdg-mime default cursor.desktop text/javascript
+        xdg-mime default cursor.desktop text/x-c
+        xdg-mime default cursor.desktop text/x-c++
+        xdg-mime default cursor.desktop text/x-java
+
+        # Set Cursor as default editor for git commit messages
+        git config --global core.editor "/opt/cursor.appimage --wait"
+
         update-desktop-database "$HOME/.local/share/applications"
 
         echo "Adding alias for Cursor..."
