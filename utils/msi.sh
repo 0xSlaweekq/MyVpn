@@ -79,67 +79,44 @@ sudo systemctl enable msi-battery.service
 sudo systemctl start msi-battery.service
 
 echo "🔹 Installing Qt 6.8.2 build dependencies..."
+sudo add-apt-repository -y ppa:kubuntu-ppa/backports
 sudo apt update
-sudo apt install -y build-essential perl python3 cmake ninja-build libclang-dev \
-  libgl1-mesa-dev libglu1-mesa-dev libvulkan-dev libxkbcommon-dev libxkbcommon-x11-dev \
-  libx11-dev libxcb1-dev libxcb-cursor-dev libxcb-glx0-dev libxcb-icccm4-dev \
-  libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render0-dev \
-  libxcb-render-util0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-sync-dev \
-  libxcb-util-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-xkb-dev \
-  libxext-dev libxi-dev libxrender-dev libfontconfig1-dev libfreetype6-dev \
-  libglib2.0-dev libicu-dev libjpeg-dev libpng-dev libssl-dev zlib1g-dev
+sudo apt install -y qt6-base-dev qt6-declarative-dev qt6-tools-dev
 
-
-echo "🔹 Downloading Qt 6.8.2 source code..."
-if [ ! -f "/tmp/qt-everywhere-src-6.8.2.tar.xz" ]; then
-  sudo wget -c "https://download.qt.io/official_releases/qt/6.8/6.8.2/single/qt-everywhere-src-6.8.2.tar.xz" -O /tmp/qt-everywhere-src-6.8.2.tar.xz || {
-    echo "Failed to download Qt source code. Skipping installation."
-    exit 1
-  }
-fi
-
-echo "🔹 Extracting Qt 6.8.2 source code..."
-if [ -d "/tmp/qt-everywhere-src-6.8.2" ]; then
-  sudo rm -rf /tmp/qt-everywhere-src-6.8.2
-fi
-sudo tar -xf /tmp/qt-everywhere-src-6.8.2.tar.xz -C /tmp || {
-  echo "Failed to extract Qt source code. Skipping installation."
-  exit 1
-}
-
-echo "🔹 Building Qt 6.8.2 (this will take a while)..."
-if [ -d "/tmp/qt-build" ]; then
-  sudo rm -rf /tmp/qt-build
-fi
-mkdir -p /tmp/qt-build
-cd /tmp/qt-build || { echo "Failed to create build directory"; exit 1; }
-
-sudo /tmp/qt-everywhere-src-6.8.2/configure -prefix /usr/local/Qt-6.8.2 \
-  -release -opensource -confirm-license
-
-make -j$(nproc)
-sudo make install
-
-if [ -d "/usr/local/Qt-6.8.2" ]; then
-  echo "🔹 Setting up Qt 6.8.2 environment..."
-  if [ -f "/etc/profile.d/qt6.sh" ]; then
-    echo "Qt6 environment file already exists, skipping..."
-  else
-    sudo tee /etc/profile.d/qt6.sh > /dev/null <<EOL
-export PATH=/usr/local/Qt-6.8.2/bin:\$PATH
-export LD_LIBRARY_PATH=/usr/local/Qt-6.8.2/lib:\$LD_LIBRARY_PATH
-export QT_PLUGIN_PATH=/usr/local/Qt-6.8.2/plugins
-export QML2_IMPORT_PATH=/usr/local/Qt-6.8.2/qml
-EOL
-  fi
-  sudo ldconfig
-
-  export PATH=/usr/local/Qt-6.8.2/bin:$PATH
-  export LD_LIBRARY_PATH=/usr/local/Qt-6.8.2/lib:$LD_LIBRARY_PATH
-  export QT_PLUGIN_PATH=/usr/local/Qt-6.8.2/plugins
-  export QML2_IMPORT_PATH=/usr/local/Qt-6.8.2/qml
-fi
+sudo wget https://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run /tmp/qt-online.run
+cd /tmp
+chmod +x ./qt-online.run
+./qt-online.run
 cd ~
+
+# Добавляем пути Qt 6.8.2 в .bashrc
+echo 'export PATH=$HOME/Qt/6.8.2/gcc_64/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=$HOME/Qt/6.8.2/gcc_64/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+echo 'export QT_PLUGIN_PATH=$HOME/Qt/6.8.2/gcc_64/plugins:$QT_PLUGIN_PATH' >> ~/.bashrc
+echo 'export QML2_IMPORT_PATH=$HOME/Qt/6.8.2/gcc_64/qml:$QML2_IMPORT_PATH' >> ~/.bashrc
+
+# Применяем изменения к текущей сессии
+source ~/.bashrc
+
+# Создаем символические ссылки для основных библиотек Qt
+sudo ln -sf $HOME/Qt/6.8.2/gcc_64/lib/libQt6Core.so.6 /usr/lib/libQt6Core.so.6
+sudo ln -sf $HOME/Qt/6.8.2/gcc_64/lib/libQt6Gui.so.6 /usr/lib/libQt6Gui.so.6
+sudo ln -sf $HOME/Qt/6.8.2/gcc_64/lib/libQt6Widgets.so.6 /usr/lib/libQt6Widgets.so.6
+sudo ln -sf $HOME/Qt/6.8.2/gcc_64/lib/libQt6Network.so.6 /usr/lib/libQt6Network.so.6
+sudo ln -sf $HOME/Qt/6.8.2/gcc_64/lib/libQt6Qml.so.6 /usr/lib/libQt6Qml.so.6
+sudo ln -sf $HOME/Qt/6.8.2/gcc_64/lib/libQt6Quick.so.6 /usr/lib/libQt6Quick.so.6
+
+# Обновляем кэш библиотек
+sudo ldconfig
+
+# Создаем файл конфигурации для ldconfig
+sudo bash -c "echo '$HOME/Qt/6.8.2/gcc_64/lib' > /etc/ld.so.conf.d/qt6.conf"
+sudo ldconfig
+
+# Создаем альтернативу для qmake6
+sudo update-alternatives --install /usr/bin/qmake6 qmake6 $HOME/Qt/6.8.2/gcc_64/bin/qmake6 100
+source ~/.bashrc
+qmake6 --version
 
 if command -v mcontrolcenter &> /dev/null; then
     echo "MControlCenter already installed, skipping..."
