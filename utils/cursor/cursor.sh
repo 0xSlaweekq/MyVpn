@@ -6,7 +6,6 @@ sudo apt update
 sudo apt install -y curl wget dbus-x11
 
 CURSOR_DIR=$HOME/Applications/cursor
-INSTALL_DIR=/mnt/D/CRYPTO/MyVpn/utils/cursor
 
 echo "🔹 Downloading Cursor AppImage..."
 mkdir -p $CURSOR_DIR
