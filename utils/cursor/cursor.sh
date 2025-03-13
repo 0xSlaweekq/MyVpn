@@ -45,20 +45,7 @@ if ! [ -f /opt/cursor/cursor.appimage ]; then
 
     update-desktop-database "$HOME/.local/share/applications"
 
-    echo "Adding alias for Cursor..."
-    BASHRC_FILE="~/.bashrc"
-    ALIAS_LINE="alias cursor='/opt/cursor/cursor.appimage --no-sandbox'"
-
-    if ! grep -q "alias cursor=" "$BASHRC_FILE"; then
-        echo "$ALIAS_LINE" >> "$BASHRC_FILE"
-        echo "Alias 'cursor' added to .bashrc"
-        echo "You can now run Cursor by typing 'cursor' in terminal after restarting your shell or running 'source ~/.bashrc'"
-    else
-        echo "Alias 'cursor' already exists in .bashrc"
-    fi
-
     echo "Cursor AI IDE installation complete. You can find it in your application menu."
-    source "$BASHRC_FILE"
 else
     echo "🔹 Cursor AI IDE is already installed."
 fi
