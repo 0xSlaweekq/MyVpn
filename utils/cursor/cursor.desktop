@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Cursor AI IDE
-Exec=$HOME/Applications/cursor/cursor.AppImage --no-sandbox
-Icon=$HOME/Applications/cursor/cursor.png
+Exec=~/Applications/cursor/cursor.AppImage --no-sandbox
+Icon=~/Applications/cursor/cursor.png
 Terminal=false
 Type=Application
 Categories=Utility;Development;

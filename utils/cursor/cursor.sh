@@ -5,7 +5,7 @@ echo "🔹 Installing Cursor AI IDE..."
 sudo apt update
 sudo apt install -y curl wget dbus-x11
 
-CURSOR_DIR=$HOME/Applications/cursor
+CURSOR_DIR=~/Applications/cursor
 
 echo "🔹 Downloading Cursor AppImage..."
 mkdir -p $CURSOR_DIR
@@ -19,15 +19,16 @@ wget -O $CURSOR_DIR/update-cursor.sh "https://raw.githubusercontent.com/0xSlawee
 chmod +x $CURSOR_DIR/update-cursor.sh
 
 echo "🔹 Creating .desktop entry for Cursor..."
-mkdir -p "$HOME/.local/share/applications"
-wget -O $HOME/.local/share/applications/cursor.desktop "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.desktop"
+mkdir -p "~/.local/share/applications"
+wget -O ~/.local/share/applications/cursor.desktop "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.desktop"
 
 echo "🔹 Creating update service for Cursor..."
-SYSTEMD_DIR=$HOME/.config/systemd/user
+SYSTEMD_DIR=~/.config/systemd/user
 mkdir -p $SYSTEMD_DIR
 wget -O $SYSTEMD_DIR/update-cursor.service "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.service"
 systemctl --user enable update-cursor.service
 systemctl --user start update-cursor.service
+systemctl --user status update-cursor.service
 
 xdg-mime default cursor.desktop text/plain
 xdg-mime default cursor.desktop application/x-shellscript
@@ -40,10 +41,10 @@ xdg-mime default cursor.desktop text/x-java
 # Set Cursor as default editor for git commit messages
 git config --global core.editor "$CURSOR_DIR/cursor.AppImage --wait"
 
-update-desktop-database "$HOME/.local/share/applications"
+update-desktop-database "~/.local/share/applications"
 
 echo "Adding alias for Cursor..."
-BASHRC_FILE="$HOME/.bashrc"
+BASHRC_FILE="~/.bashrc"
 ALIAS_LINE="alias cursor='$CURSOR_DIR/cursor.AppImage --no-sandbox'"
 
 if ! grep -q "alias cursor=" "$BASHRC_FILE"; then
