@@ -9,8 +9,8 @@ if ! [ -f /opt/cursor/cursor.appimage ]; then
     echo "Downloading Cursor AppImage..."
     sudo mkdir -p /opt/cursor
     sudo curl -L https://downloader.cursor.sh/linux/appImage/x64 -o /opt/cursor/cursor.appimage
-    sudo chmod +x /opt/cursor/cursor.AppImage
-    sudo ln -s /opt/cursor/cursor.AppImage /usr/local/bin/cursor
+    sudo chmod +x /opt/cursor/cursor.appimage
+    sudo ln -s /opt/cursor/cursor.appimage /usr/local/bin/cursor
 
     BASE_URL=https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor
     echo "Downloading Cursor icon..."
