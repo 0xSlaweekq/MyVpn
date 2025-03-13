@@ -14,13 +14,13 @@ chmod +x $CURSOR_DIR/cursor.AppImage
 sudo ln -s $CURSOR_DIR/cursor.AppImage /usr/local/bin/cursor
 wget -O $CURSOR_DIR/cursor.png "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.png"
 
-echo "🔹 Creating .desktop entry for Cursor..."
-mkdir -p "$HOME/.local/share/applications"
-wget -O $HOME/.local/share/applications/cursor.desktop "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.desktop"
-
 echo "🔹 Creating update script for Cursor..."
 wget -O $CURSOR_DIR/update-cursor.sh "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.sh"
 chmod +x $CURSOR_DIR/update-cursor.sh
+
+echo "🔹 Creating .desktop entry for Cursor..."
+mkdir -p "$HOME/.local/share/applications"
+wget -O $HOME/.local/share/applications/cursor.desktop "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.desktop"
 
 echo "🔹 Creating update service for Cursor..."
 SYSTEMD_DIR=$HOME/.config/systemd/user
