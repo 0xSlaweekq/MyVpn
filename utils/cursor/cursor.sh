@@ -17,14 +17,13 @@ echo "🔹 Creating .desktop entry for Cursor..."
 mkdir -p "~/.local/share/applications"
 wget -O ~/.local/share/applications/cursor.desktop "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.desktop"
 
-SYSTEMD_DIR=/etc/systemd/system/
+SYSTEMD_DIR=/etc/systemd/system
 echo "🔹 Creating update script for Cursor..."
-wget -O $SYSTEMD_DIR/update-cursor.sh "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.sh"
+sudo wget -O $SYSTEMD_DIR/update-cursor.sh "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.sh"
 chmod +x $SYSTEMD_DIR/update-cursor.sh
 
 echo "🔹 Creating update service for Cursor..."
-mkdir -p $SYSTEMD_DIR
-wget -O $SYSTEMD_DIR/update-cursor.service "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.service"
+sudo wget -O $SYSTEMD_DIR/update-cursor.service "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.service"
 sudo systemctl daemon-reload
 sudo systemctl enable update-cursor
 sudo systemctl start update-cursor
