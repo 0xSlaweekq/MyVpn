@@ -1,25 +1,25 @@
 #!/bin/bash
 set -e
 
-if ! [ -f /opt/cursor/cursor.appimage ]; then
+if ! [ -f /opt/cursor.appimage ]; then
     echo "🔹 Installing Cursor AI IDE..."
     sudo apt update
     sudo apt install -y curl wget
 
     echo "Downloading Cursor AppImage..."
-    sudo curl -L https://downloader.cursor.sh/linux/appImage/x64 -o /opt/cursor/cursor.appimage
-    sudo chmod +x /opt/cursor/cursor.appimage
+    sudo curl -L https://downloader.cursor.sh/linux/appImage/x64 -o /opt/cursor.appimage
+    sudo chmod +x /opt/cursor.appimage
 
     echo "Downloading Cursor icon..."
-    sudo curl -L https://raw.githubusercontent.com/rahuljangirwork/copmany-logos/refs/heads/main/cursor.png -o /opt/cursor/cursor.png
+    sudo curl -L https://raw.githubusercontent.com/rahuljangirwork/copmany-logos/refs/heads/main/cursor.png -o /opt/cursor.png
 
     echo "Creating .desktop entry for Cursor..."
     mkdir -p "$HOME/.local/share/applications"
     bash -c "cat > $HOME/.local/share/applications/cursor.desktop" <<EOL
 [Desktop Entry]
 Name=Cursor AI IDE
-Exec=/opt/cursor/cursor.appimage --no-sandbox
-Icon=/opt/cursor/cursor.png
+Exec=/opt/cursor.appimage --no-sandbox
+Icon=/opt/cursor.png
 Terminal=false
 Type=Application
 Categories=Development;
@@ -35,13 +35,13 @@ EOL
     xdg-mime default cursor.desktop text/x-java
 
     # Set Cursor as default editor for git commit messages
-    git config --global core.editor "/opt/cursor/cursor.appimage --wait"
+    git config --global core.editor "/opt/cursor.appimage --wait"
 
     update-desktop-database "$HOME/.local/share/applications"
 
     echo "Adding alias for Cursor..."
     BASHRC_FILE="$HOME/.bashrc"
-    ALIAS_LINE="alias cursor='/opt/cursor/cursor.appimage --no-sandbox'"
+    ALIAS_LINE="alias cursor='/opt/cursor.appimage --no-sandbox'"
 
     if ! grep -q "alias cursor=" "$BASHRC_FILE"; then
         echo "$ALIAS_LINE" >> "$BASHRC_FILE"
