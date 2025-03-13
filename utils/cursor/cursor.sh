@@ -29,6 +29,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable update-cursor
 sudo systemctl start update-cursor
 sudo systemctl status update-cursor
+# sudo systemctl stop update-cursor
+# sudo systemctl disable update-cursor
 
 xdg-mime default cursor.desktop text/plain
 xdg-mime default cursor.desktop application/x-shellscript
