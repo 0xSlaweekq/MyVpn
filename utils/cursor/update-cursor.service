@@ -2,7 +2,7 @@
 Description=Update Cursor
 
 [Service]
-ExecStart=~/Applications/cursor/update-cursor.sh
+ExecStart=/home/$USER/Applications/cursor/update-cursor.sh
 Type=oneshot
 
 [Install]
