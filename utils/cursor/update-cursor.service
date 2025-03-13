@@ -2,8 +2,8 @@
 Description=Update Cursor
 
 [Service]
-ExecStart=/home/$USER/Applications/cursor/update-cursor.sh
+ExecStart=/etc/systemd/system/update-cursor.sh
 Type=oneshot
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

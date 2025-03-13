@@ -6,7 +6,6 @@ sudo apt update
 sudo apt install -y curl wget dbus-x11
 
 CURSOR_DIR=~/Applications/cursor
-
 echo "🔹 Downloading Cursor AppImage..."
 mkdir -p $CURSOR_DIR
 wget -O $CURSOR_DIR/cursor.AppImage "https://downloader.cursor.sh/linux/appImage/x64"
@@ -14,21 +13,22 @@ chmod +x $CURSOR_DIR/cursor.AppImage
 sudo ln -s $CURSOR_DIR/cursor.AppImage /usr/local/bin/cursor
 wget -O $CURSOR_DIR/cursor.png "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.png"
 
-echo "🔹 Creating update script for Cursor..."
-wget -O $CURSOR_DIR/update-cursor.sh "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.sh"
-chmod +x $CURSOR_DIR/update-cursor.sh
-
 echo "🔹 Creating .desktop entry for Cursor..."
 mkdir -p "~/.local/share/applications"
 wget -O ~/.local/share/applications/cursor.desktop "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/cursor.desktop"
 
+SYSTEMD_DIR=/etc/systemd/system/
+echo "🔹 Creating update script for Cursor..."
+wget -O $SYSTEMD_DIR/update-cursor.sh "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.sh"
+chmod +x $SYSTEMD_DIR/update-cursor.sh
+
 echo "🔹 Creating update service for Cursor..."
-SYSTEMD_DIR=~/.config/systemd/user
 mkdir -p $SYSTEMD_DIR
 wget -O $SYSTEMD_DIR/update-cursor.service "https://raw.githubusercontent.com/0xSlaweekq/MyVpn/main/utils/cursor/update-cursor.service"
-systemctl --user enable update-cursor.service
-systemctl --user start update-cursor.service
-systemctl --user status update-cursor.service
+sudo systemctl daemon-reload
+sudo systemctl enable update-cursor
+sudo systemctl start update-cursor
+sudo systemctl status update-cursor
 
 xdg-mime default cursor.desktop text/plain
 xdg-mime default cursor.desktop application/x-shellscript
